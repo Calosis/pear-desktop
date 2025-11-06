@@ -117,7 +117,7 @@ app.commandLine.appendSwitch('ozone-platform-hint', 'auto');
 // WaylandWindowDecorations: Required for Wayland decorations
 app.commandLine.appendSwitch(
   'enable-features',
-  'OverlayScrollbar,SharedArrayBuffer,UseOzonePlatform,WaylandWindowDecorations',
+  'OverlayScrollbar,SharedArrayBuffer,UseOzonePlatform,WaylandWindowDecorations, AcceleratedVideoEncoder, AcceleratedVideoDecoder, AcceleratedVideoDecodeLinuxGL, AcceleratedVideoDecodeLinuxZeroCopyGL',
 );
 // Disable Fluent Scrollbar (for OverlayScrollbar)
 app.commandLine.appendSwitch('disable-features', 'FluentScrollbar');
@@ -363,10 +363,10 @@ async function createMainWindow() {
       ...(isTesting()
         ? undefined
         : {
-            // Sandbox is only enabled in tests for now
-            // See https://www.electronjs.org/docs/latest/tutorial/sandbox#preload-scripts
-            sandbox: false,
-          }),
+          // Sandbox is only enabled in tests for now
+          // See https://www.electronjs.org/docs/latest/tutorial/sandbox#preload-scripts
+          sandbox: false,
+        }),
     },
     ...decorations,
   };
@@ -494,7 +494,7 @@ async function createMainWindow() {
         ...defaultTitleBarOverlayOptions,
         height: Math.floor(
           defaultTitleBarOverlayOptions.height! *
-            win.webContents.getZoomFactor(),
+          win.webContents.getZoomFactor(),
         ),
       });
     }
